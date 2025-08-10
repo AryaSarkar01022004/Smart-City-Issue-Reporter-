@@ -1,0 +1,36 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/smart_city}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+app:
+  corsOrigin: ${CORS_ORIGIN:http://localhost:3000}
+  jwtSecret: ${JWT_SECRET:please_change_me}
+  admin:
+    email: ${ADMIN_EMAIL:admin@example.com}
+    passwordHash: ${ADMIN_PASSWORD_HASH:} # BCrypt hash (preferred)
+    passwordPlain: ${ADMIN_PASSWORD_PLAIN:} # dev fallback
+  cloudinary:
+    cloudName: ${CLOUDINARY_CLOUD_NAME:}
+    apiKey: ${CLOUDINARY_API_KEY:}
+    apiSecret: ${CLOUDINARY_API_SECRET:}
+    folder: ${CLOUDINARY_FOLDER:smart-city-issues}
+  ml:
+    url: ${ML_API_URL:}
+    timeoutMs: ${ML_API_TIMEOUT_MS:5000}
